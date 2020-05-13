@@ -1,5 +1,6 @@
 library('httr')
 library("stringr")
+library('jsonlite')
 
 url = "https://api.codenation.dev/v1/challenge/dev-ps/generate-data"
 
@@ -11,7 +12,7 @@ alfabeto <- c('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q
 casas <- unlist(data["numero_casas"], use.names=F)
 cifra <- str_to_lower(unlist(data["cifrado"], use.names=F))
 
-result = ''
+result <- ''
 
 for(c in strsplit(cifra, "")[[1]]) {
   if(!is.na(match(c, alfabeto))) {
@@ -20,3 +21,8 @@ for(c in strsplit(cifra, "")[[1]]) {
     result <- str_c(result, c)
   }
 }
+
+data["decifrado"] <- result
+
+dataJSON <- toJSON(data, pretty = T, auto_unbox = T)
+write(dataJSON, 'answer.json')
