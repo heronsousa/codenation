@@ -1,6 +1,7 @@
 library('httr')
-library("stringr")
+library('stringr')
 library('jsonlite')
+library('digest')
 
 url = "https://api.codenation.dev/v1/challenge/dev-ps/generate-data"
 
@@ -26,3 +27,5 @@ data["decifrado"] <- result
 
 dataJSON <- toJSON(data, pretty = T, auto_unbox = T)
 write(dataJSON, 'answer.json')
+
+sha1(result)
