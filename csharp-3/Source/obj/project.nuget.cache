@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "d8cx9G2BBfxfh5ZtihZqNn1ER1/1roMw+99+IuvxI8soo9kJHkXwtrf4iedCqO6H1+VSc75eFclmn8raHcE+Lw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\heron\\codenation\\csharp-3\\Source\\Source.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\heron\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\heron\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
