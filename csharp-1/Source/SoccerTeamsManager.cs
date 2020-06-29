@@ -49,17 +49,17 @@ namespace Codenation.Challenge
 
         public void SetCaptain(long playerId)
         {
-            if (!Players.Any(player => player.id == playerId))
+            if (!Players.Any(foundPlayer => foundPlayer.id == playerId))
             {
                 throw new PlayerNotFoundException();
             }
 
-            Player player = Players.Find(player => player.id == playerId);
-            Team team = Teams.Find(team => team.id == player.teamId);
+            Player player = Players.Find(foundPlayer => foundPlayer.id == playerId);
+            Team team = Teams.Find(foundTeam => foundTeam.id == player.teamId);
 
             if (team.captainId != -1)
             {
-                Player currentCaptain = Players.Find(currentCaptain => currentCaptain.id == team.captainId);
+                Player currentCaptain = Players.Find(foundCurrentCaptain => foundCurrentCaptain.id == team.captainId);
                 currentCaptain.isCaptain = false;
             }
 
@@ -69,12 +69,12 @@ namespace Codenation.Challenge
 
         public long GetTeamCaptain(long teamId)
         {
-            if (!Teams.Any(team => team.id == teamId))
+            if (!Teams.Any(foundTeam => foundTeam.id == teamId))
             {
                 throw new TeamNotFoundException();
             }
 
-            Team team = Teams.Find(team => team.id == teamId);
+            Team team = Teams.Find(foundTeam => foundTeam.id == teamId);
 
             if (team.captainId == -1)
             {
@@ -93,7 +93,7 @@ namespace Codenation.Challenge
 
             return Players
                 .Where(player => player.id == playerId)
-                .Select(player => player.name).FirstOrDefault<string>();
+                .Select(player => player.name).FirstOrDefault();
         }
 
         public string GetTeamName(long teamId)
@@ -130,9 +130,8 @@ namespace Codenation.Challenge
 
             return Players
                 .Where(player => player.teamId == teamId)
-                .OrderByDescending(player => player.skillLevel)
-                .Select(player => player.id)
-                .FirstOrDefault();
+                .OrderByDescending(player => player.skillLevel).ThenBy(player => player.id)
+                .Select(player => player.id).FirstOrDefault();
         }
 
         public long GetOlderTeamPlayer(long teamId)
@@ -144,9 +143,8 @@ namespace Codenation.Challenge
 
             return Players
                 .Where(player => player.teamId == teamId)
-                .OrderBy(player => player.birthDate)
-                .OrderBy(player => player.id)
-                .FirstOrDefault();
+                .OrderBy(player => player.birthDate).ThenBy(player => player.id)
+                .Select(player => player.id).FirstOrDefault();
         }
 
         public List<long> GetTeams()
@@ -156,30 +154,51 @@ namespace Codenation.Challenge
                 .OrderBy(team => team).ToList();
         }
 
-        public List<long> GetPlayers()
-        {
-            return Players
-                .Select(player => player.id).ToList();
-        }
-
         public long GetHigherSalaryPlayer(long teamId)
         {
-            throw new NotImplementedException();
+            if (!Teams.Any(team => team.id == teamId))
+            {
+                throw new TeamNotFoundException();
+            }
+
+            return Players
+                .Where(player => player.teamId == teamId)
+                .OrderByDescending(player => player.salary).ThenBy(player => player.id)
+                .Select(player => player.id).FirstOrDefault();
         }
 
         public decimal GetPlayerSalary(long playerId)
         {
-            throw new NotImplementedException();
+            if (!Players.Any(player => player.id == playerId))
+            {
+                throw new PlayerNotFoundException();
+            }
+
+            return Players
+                .Where(player => player.id == playerId)
+                .OrderByDescending(player => player.salary)
+                .Select(player => player.salary).FirstOrDefault();
         }
 
         public List<long> GetTopPlayers(int top)
         {
-            throw new NotImplementedException();
+            return Players
+                .OrderByDescending(player => player.skillLevel).ThenBy(player => player.id)
+                .Take(top)
+                .Select(player => player.id).ToList();
         }
 
         public string GetVisitorShirtColor(long teamId, long visitorTeamId)
         {
-            throw new NotImplementedException();
+            if (!Teams.Any(team => team.id == teamId))
+            {
+                throw new TeamNotFoundException();
+            }
+
+            Team homeTeam = Teams.Find(home => home.id == teamId);
+            Team visitorTeam = Teams.Find(visitor => visitor.id == visitorTeamId);
+
+            return homeTeam.mainShirtColor == visitorTeam.mainShirtColor ? visitorTeam.secondaryShirtColor : visitorTeam.mainShirtColor;
         }
 
     }
