@@ -21,5 +21,6 @@ namespace Source.Modelagem
         public DateTime createDate { get; set; }
         public string mainShirtColor { get; set; }
         public string secondaryShirtColor { get; set; }
+        public long captainId { get; set; } = -1;
     }
 }
