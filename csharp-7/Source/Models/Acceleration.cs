@@ -5,12 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Codenation.Challenge.Models
 {
-    [Table("company")]
-    public class Company
+    [Table("acceleration")]
+    public class Acceleration
     {
         [Key]
         [Column("id")]
         public int Id { get; set; }
+        public int challenge_id { get; set; }
         [MaxLength(100)]
         public string name { get; set; }
         [MaxLength(50)]

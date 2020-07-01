@@ -5,17 +5,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Codenation.Challenge.Models
 {
-    [Table("company")]
-    public class Company
+    [Table("user")]
+    public class User
     {
         [Key]
         [Column("id")]
         public int Id { get; set; }
         [MaxLength(100)]
-        public string name { get; set; }
+        public string full_name { get; set; }
+        [MaxLength(100)]
+        public string email { get; set; }
         [MaxLength(50)]
-        public string slug { get; set; }
+        public string nickname { get; set; }
+        [MaxLength(255)]
+        public string password { get; set; }
         public DateTime created_at { get; set; }
         public List<Candidate> Candidates { get; set; }
+        public List<Submission> Submissions { get; set; }
     }
 }

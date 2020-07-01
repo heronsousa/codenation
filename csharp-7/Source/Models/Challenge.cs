@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Codenation.Challenge.Models
 {
-    [Table("company")]
-    public class Company
+    [Table("challenge")]
+    public class Challenge
     {
         [Key]
         [Column("id")]
@@ -16,6 +16,7 @@ namespace Codenation.Challenge.Models
         [MaxLength(50)]
         public string slug { get; set; }
         public DateTime created_at { get; set; }
-        public List<Candidate> Candidates { get; set; }
+        public List<Submission> Submissions { get; set; }
+        public List<Acceleration> Accelerations { get; set; }
     }
 }
