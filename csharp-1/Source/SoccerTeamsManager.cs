@@ -39,27 +39,21 @@ namespace Codenation.Challenge
                 throw new UniqueIdentifierException();
             }
 
-            if (!Teams.Any(team => team.id == teamId))
-            {
-                throw new TeamNotFoundException();
-            }
+            ThrowTeamNotFoundException(teamId);
 
             Players.Add(newPlayer);
         }
 
         public void SetCaptain(long playerId)
         {
-            if (!Players.Any(foundPlayer => foundPlayer.id == playerId))
-            {
-                throw new PlayerNotFoundException();
-            }
+            ThrowPlayerNotFoundException(playerId);
 
-            Player player = Players.Find(foundPlayer => foundPlayer.id == playerId);
-            Team team = Teams.Find(foundTeam => foundTeam.id == player.teamId);
+            Player player = Players.Find(obj => obj.id == playerId);
+            Team team = Teams.Find(obj => obj.id == player.teamId);
 
             if (team.captainId != -1)
             {
-                Player currentCaptain = Players.Find(foundCurrentCaptain => foundCurrentCaptain.id == team.captainId);
+                Player currentCaptain = Players.Find(obj => obj.id == team.captainId);
                 currentCaptain.isCaptain = false;
             }
 
@@ -69,12 +63,9 @@ namespace Codenation.Challenge
 
         public long GetTeamCaptain(long teamId)
         {
-            if (!Teams.Any(foundTeam => foundTeam.id == teamId))
-            {
-                throw new TeamNotFoundException();
-            }
+            ThrowTeamNotFoundException(teamId);
 
-            Team team = Teams.Find(foundTeam => foundTeam.id == teamId);
+            Team team = Teams.Find(obj => obj.id == teamId);
 
             if (team.captainId == -1)
             {
@@ -86,10 +77,7 @@ namespace Codenation.Challenge
 
         public string GetPlayerName(long playerId)
         {
-            if (!Players.Any(player => player.id == playerId))
-            {
-                throw new PlayerNotFoundException();
-            }
+            ThrowPlayerNotFoundException(playerId);
 
             return Players
                 .Where(player => player.id == playerId)
@@ -98,10 +86,7 @@ namespace Codenation.Challenge
 
         public string GetTeamName(long teamId)
         {
-            if (!Teams.Any(team => team.id == teamId))
-            {
-                throw new TeamNotFoundException();
-            }
+            ThrowTeamNotFoundException(teamId);
 
             return Teams
                 .Where(team => team.id == teamId)
@@ -110,10 +95,7 @@ namespace Codenation.Challenge
 
         public List<long> GetTeamPlayers(long teamId)
         {
-            if (!Teams.Any(team => team.id ==teamId))
-            {
-                throw new TeamNotFoundException();
-            }
+            ThrowTeamNotFoundException(teamId);
 
             return Players
                 .Where(player => player.teamId == teamId)
@@ -123,10 +105,7 @@ namespace Codenation.Challenge
 
         public long GetBestTeamPlayer(long teamId)
         {
-            if (!Teams.Any(team => team.id == teamId))
-            {
-                throw new TeamNotFoundException();
-            }
+            ThrowTeamNotFoundException(teamId);
 
             return Players
                 .Where(player => player.teamId == teamId)
@@ -136,10 +115,7 @@ namespace Codenation.Challenge
 
         public long GetOlderTeamPlayer(long teamId)
         {
-            if (!Teams.Any(team => team.id == teamId))
-            {
-                throw new TeamNotFoundException();
-            }
+            ThrowTeamNotFoundException(teamId);
 
             return Players
                 .Where(player => player.teamId == teamId)
@@ -156,10 +132,7 @@ namespace Codenation.Challenge
 
         public long GetHigherSalaryPlayer(long teamId)
         {
-            if (!Teams.Any(team => team.id == teamId))
-            {
-                throw new TeamNotFoundException();
-            }
+            ThrowTeamNotFoundException(teamId);
 
             return Players
                 .Where(player => player.teamId == teamId)
@@ -169,10 +142,7 @@ namespace Codenation.Challenge
 
         public decimal GetPlayerSalary(long playerId)
         {
-            if (!Players.Any(player => player.id == playerId))
-            {
-                throw new PlayerNotFoundException();
-            }
+            ThrowPlayerNotFoundException(playerId);
 
             return Players
                 .Where(player => player.id == playerId)
@@ -190,16 +160,30 @@ namespace Codenation.Challenge
 
         public string GetVisitorShirtColor(long teamId, long visitorTeamId)
         {
-            if (!Teams.Any(team => team.id == teamId))
-            {
-                throw new TeamNotFoundException();
-            }
+            ThrowTeamNotFoundException(teamId);
+            ThrowTeamNotFoundException(visitorTeamId);
 
-            Team homeTeam = Teams.Find(home => home.id == teamId);
-            Team visitorTeam = Teams.Find(visitor => visitor.id == visitorTeamId);
+            Team homeTeam = Teams.Find(obj => obj.id == teamId);
+            Team visitorTeam = Teams.Find(obj => obj.id == visitorTeamId);
 
             return homeTeam.mainShirtColor == visitorTeam.mainShirtColor ? visitorTeam.secondaryShirtColor : visitorTeam.mainShirtColor;
         }
 
+
+        public void ThrowPlayerNotFoundException(long playerId)
+        {
+            if (!Players.Any(player => player.id == playerId))
+            {
+                throw new PlayerNotFoundException();
+            }
+        }
+
+        public void ThrowTeamNotFoundException(long teamId)
+        {
+            if (!Teams.Any(team => team.id == teamId))
+            {
+                throw new TeamNotFoundException();
+            }
+        }
     }
 }
