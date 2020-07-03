@@ -8,10 +8,22 @@ namespace Codenation.Challenge.Models
     [Table("candidate")]
     public class Candidate
     {
-        public int user_id { get; set; }
-        public int acceleration_id { get; set; }
-        public int company_id { get; set; }
-        public int status { get; set; }
-        public DateTime created_at { get; set; }
+        [Column("user_id"), Required]
+        public int UserId { get; set; }
+        public User User { get; set; }
+
+        [Column("acceleration_id"), Required]
+        public int AccelerationId { get; set; }
+        public Acceleration Acceleration { get; set; }
+        
+        [Column("company_id"), Required]
+        public int CompanyId { get; set; }
+        public Company Company { get; set; }
+        
+        [Column("status"), Required]
+        public int Status { get; set; }
+
+        [Column("created_at"), Required]
+        public DateTime CreatedAt { get; set; }
     }
 }

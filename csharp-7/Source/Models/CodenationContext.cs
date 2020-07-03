@@ -18,6 +18,15 @@ namespace Codenation.Challenge.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Submission>(entity =>
+            {
+                entity.HasKey(e => new { e.challenge_id, e.user_id });
+            });
+
+            modelBuilder.Entity<Candidate>(entity =>
+            {
+                entity.HasKey(e => new { e.user_id, e.company_id, e.acceleration_id });
+            });
         }
     }
 }

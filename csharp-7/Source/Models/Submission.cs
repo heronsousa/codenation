@@ -8,10 +8,18 @@ namespace Codenation.Challenge.Models
     [Table("submission")]
     public class Submission
     {
-        public int user_id { get; set; }
-        public int challenge_id { get; set; }
-        [Column(TypeName = "decimal(9, 2)")]
-        public decimal score { get; set; }
-        public DateTime created_at { get; set; }
+        [Column("user_id"), Required]
+        public int UserId { get; set; }
+        public User User { get; set; }
+
+        [Column("challenge_id"), Required]
+        public int ChallengeId { get; set; }
+        public Challenge Challenge { get; set; }
+
+        [Column("score", TypeName = "decimal(9, 2)"), Required]
+        public decimal Score { get; set; }
+
+        [Column("created_at"), Required]
+        public DateTime CreatedAt { get; set; }
     }
 }

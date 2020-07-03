@@ -9,13 +9,18 @@ namespace Codenation.Challenge.Models
     public class Company
     {
         [Key]
-        [Column("id")]
+        [Column("id"), Required]
         public int Id { get; set; }
-        [MaxLength(100)]
-        public string name { get; set; }
-        [MaxLength(50)]
-        public string slug { get; set; }
-        public DateTime created_at { get; set; }
+        
+        [Column("name"), MaxLength(100), Required]
+        public string Name { get; set; }
+        
+        [Column("slug"), MaxLength(50), Required]
+        public string Slug { get; set; }
+
+        [Column("created_at"), Required]
+        public DateTime CreatedAt { get; set; }
+
         public List<Candidate> Candidates { get; set; }
     }
 }
