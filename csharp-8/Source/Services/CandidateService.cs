@@ -29,8 +29,9 @@ namespace Codenation.Challenge.Services
 
         public Candidate FindById(int userId, int accelerationId, int companyId)
         {
-            return (Candidate) _context.Candidates
-                .Where(c => c.UserId == userId && c.AccelerationId == accelerationId && c.CompanyId == companyId);
+            return _context.Candidates
+                .Where(c => c.UserId == userId && c.AccelerationId == accelerationId && c.CompanyId == companyId)
+                .FirstOrDefault();
         }
 
         public Candidate Save(Candidate candidate)
