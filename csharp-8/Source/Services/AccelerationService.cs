@@ -24,15 +24,17 @@ namespace Codenation.Challenge.Services
 
         public Acceleration FindById(int id)
         {
-            return _context.Accelerations.Find(id);
+            return _context.Accelerations
+                .Where(a => a.Id == id)
+                .FirstOrDefault();
         }
 
         public Acceleration Save(Acceleration acceleration)
         {
             if (acceleration.Id == 0)
-                _context.Add(acceleration);
+                _context.Accelerations.Add(acceleration);
             else
-                _context.Update(acceleration);
+                _context.Accelerations.Update(acceleration);
                 _context.SaveChanges();
 
             return acceleration;

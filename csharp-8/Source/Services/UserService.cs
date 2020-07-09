@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Codenation.Challenge.Models;
@@ -26,20 +27,23 @@ namespace Codenation.Challenge.Services
             return _context.Candidates
                .Where(c => c.CompanyId == companyId)
                .Select(c => c.User)
+               .Distinct()
                .ToList();
         }
 
         public User FindById(int id)
         {
-            return _context.Users.Find(id);
+            return _context.Users
+                .Where(u => u.Id == id)
+                .FirstOrDefault();
         }
 
         public User Save(User user)
         {
             if (user.Id == 0)
-                _context.Add(user);
+                _context.Users.Add(user);
             else
-                _context.Update(user);
+                _context.Users.Update(user);
                 _context.SaveChanges();
 
             return user;

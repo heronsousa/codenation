@@ -26,3 +26,5 @@ C:\Users\heron\codenation\csharp-8\Source.Test\obj\Debug\netcoreapp2.2\Source.Te
 C:\Users\heron\codenation\csharp-8\Source.Test\obj\Debug\netcoreapp2.2\Source.Test.dll
 C:\Users\heron\codenation\csharp-8\Source.Test\obj\Debug\netcoreapp2.2\Source.Test.pdb
 C:\Users\heron\codenation\csharp-8\Source.Test\obj\Debug\netcoreapp2.2\Source.Test.genruntimeconfig.cache
+C:\Users\heron\codenation\csharp-8\Source.Test\bin\Debug\netcoreapp2.2\Properties\serviceDependencies.json
+C:\Users\heron\codenation\csharp-8\Source.Test\bin\Debug\netcoreapp2.2\Properties\serviceDependencies.local.json

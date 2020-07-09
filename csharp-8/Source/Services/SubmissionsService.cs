@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Codenation.Challenge.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Codenation.Challenge.Services
 {
@@ -21,7 +22,7 @@ namespace Codenation.Challenge.Services
             var challenge = acceleration.Challenge;
 
             return _context.Submissions
-                .Where(s => s.ChallengeId == challengeId && s.ChallengeId == challenge.Id)
+                .Where(s => s.ChallengeId == challengeId)
                 .ToList();
         }
 
@@ -34,10 +35,16 @@ namespace Codenation.Challenge.Services
 
         public Submission Save(Submission submission)
         {
-            if (submission.UserId == 0 && submission.ChallengeId == 0)
-                _context.Add(submission);
+            var checkSubmission = _context.Submissions
+                .Where(s => s.ChallengeId == submission.ChallengeId && s.UserId == submission.UserId)
+                .AsNoTracking()
+                .FirstOrDefault();
+
+            if (checkSubmission == null)
+                _context.Submissions.Add(submission);
             else
-                _context.Update(submission);
+                _context.Submissions.Update(submission);
+
             _context.SaveChanges();
 
             return submission;

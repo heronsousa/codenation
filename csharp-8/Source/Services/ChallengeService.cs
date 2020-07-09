@@ -15,25 +15,20 @@ namespace Codenation.Challenge.Services
 
         public IList<Models.Challenge> FindByAccelerationIdAndUserId(int accelerationId, int userId)
         {
-            var challenges = _context.Submissions
-                .Where(s => s.UserId == userId)
-                .Select(s => s.Challenge)
+            return _context.Candidates
+                .Where(s => s.UserId == userId && s.AccelerationId == accelerationId)
+                .Select(s => s.Acceleration.Challenge)
+                .Distinct()
                 .ToList();
-
-            var accelerationService = new AccelerationService(_context);
-            var acceleration = accelerationService.FindById(accelerationId);
-
-            challenges.Add(acceleration.Challenge);
-
-            return challenges;
         }
 
         public Models.Challenge Save(Models.Challenge challenge)
         {
             if (challenge.Id == 0)
-                _context.Add(challenge);
+                _context.Challenges.Add(challenge);
             else
-                _context.Update(challenge);
+                _context.Challenges.Update(challenge);
+
             _context.SaveChanges();
 
             return challenge;

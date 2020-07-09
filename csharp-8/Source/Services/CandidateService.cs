@@ -1,6 +1,7 @@
-using System.Collections.Generic;
+ using System.Collections.Generic;
 using System.Linq;
 using Codenation.Challenge.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Codenation.Challenge.Services
 {
@@ -31,16 +32,20 @@ namespace Codenation.Challenge.Services
         {
             return _context.Candidates
                 .Where(c => c.UserId == userId && c.AccelerationId == accelerationId && c.CompanyId == companyId)
+                .AsNoTracking()
                 .FirstOrDefault();
         }
 
         public Candidate Save(Candidate candidate)
         {
-            if (candidate.UserId == 0 && candidate.CompanyId == 0 && candidate.AccelerationId == 0)
-                _context.Add(candidate);
+            var checkCandidate = FindById(candidate.UserId, candidate.AccelerationId, candidate.CompanyId);
+
+            if (checkCandidate == null)
+                _context.Candidates.Add(candidate);
             else
-                _context.Update(candidate);
-                _context.SaveChanges();
+                _context.Candidates.Update(candidate);
+                
+            _context.SaveChanges();
 
             return candidate;
         }

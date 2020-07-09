@@ -24,7 +24,9 @@ namespace Codenation.Challenge.Services
 
         public Company FindById(int id)
         {
-            return _context.Companies.Find(id);
+            return _context.Companies
+                .Where(c => c.Id == id)
+                .FirstOrDefault();
         }
 
         public IList<Company> FindByUserId(int userId)
@@ -32,15 +34,16 @@ namespace Codenation.Challenge.Services
             return _context.Candidates
                 .Where(c => c.UserId == userId)
                 .Select(c => c.Company)
+                .Distinct()
                 .ToList();
         }
 
         public Company Save(Company company)
         {
             if (company.Id == 0)
-                _context.Add(company);
+                _context.Companies.Add(company);
             else
-                _context.Update(company);
+                _context.Companies.Update(company);
                 _context.SaveChanges();
 
             return company;

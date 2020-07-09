@@ -26,3 +26,5 @@ C:\Users\heron\codenation\csharp-8\Source.TestSubmission\obj\Debug\netcoreapp2.2
 C:\Users\heron\codenation\csharp-8\Source.TestSubmission\obj\Debug\netcoreapp2.2\Source.TestSubmission.dll
 C:\Users\heron\codenation\csharp-8\Source.TestSubmission\obj\Debug\netcoreapp2.2\Source.TestSubmission.pdb
 C:\Users\heron\codenation\csharp-8\Source.TestSubmission\obj\Debug\netcoreapp2.2\Source.TestSubmission.genruntimeconfig.cache
+C:\Users\heron\codenation\csharp-8\Source.TestSubmission\bin\Debug\netcoreapp2.2\Properties\serviceDependencies.json
+C:\Users\heron\codenation\csharp-8\Source.TestSubmission\bin\Debug\netcoreapp2.2\Properties\serviceDependencies.local.json

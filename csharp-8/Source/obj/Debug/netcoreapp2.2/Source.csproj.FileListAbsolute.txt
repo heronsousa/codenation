@@ -16,3 +16,5 @@ C:\Users\heron\codenation\csharp-8\Source\obj\Debug\netcoreapp2.2\Source.RazorTa
 C:\Users\heron\codenation\csharp-8\Source\obj\Debug\netcoreapp2.2\Source.dll
 C:\Users\heron\codenation\csharp-8\Source\obj\Debug\netcoreapp2.2\Source.pdb
 C:\Users\heron\codenation\csharp-8\Source\obj\Debug\netcoreapp2.2\Source.genruntimeconfig.cache
+C:\Users\heron\codenation\csharp-8\Source\bin\Debug\netcoreapp2.2\Properties\serviceDependencies.json
+C:\Users\heron\codenation\csharp-8\Source\bin\Debug\netcoreapp2.2\Properties\serviceDependencies.local.json
