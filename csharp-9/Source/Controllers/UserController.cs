@@ -25,22 +25,27 @@ namespace Codenation.Challenge.Controllers
         // GET api/user
         [HttpGet]
         public ActionResult<IEnumerable<UserDTO>> GetAll(string accelerationName = null, int? companyId = null)
-        {            
-            throw new NotImplementedException();
+        {
+            if (accelerationName != null && companyId == null)
+                return Ok(_mapper.Map<IEnumerable<UserDTO>>(_service.FindByAccelerationName(accelerationName)));
+            else if (accelerationName == null && companyId != null)
+                return Ok(_mapper.Map<IEnumerable<UserDTO>>(_service.FindByCompanyId(companyId.Value)));
+
+            return NoContent();
         }
 
         // GET api/user/{id}
         [HttpGet("{id}")]
         public ActionResult<UserDTO> Get(int id)
-        {            
-            throw new NotImplementedException();
+        {
+            return Ok(_mapper.Map<UserDTO>(_service.FindById(id)));
         }
 
         // POST api/user
         [HttpPost]
         public ActionResult<UserDTO> Post([FromBody] UserDTO value)
         {
-            throw new NotImplementedException();
+            return Ok(_mapper.Map<UserDTO>(_service.Save(_mapper.Map<User>(value))));
         }   
      
     }
