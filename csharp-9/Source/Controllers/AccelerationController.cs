@@ -12,6 +12,7 @@ namespace Codenation.Challenge.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class AccelerationController : ControllerBase
+    {
         private readonly IAccelerationService _service;
         private readonly IMapper _mapper;
 
