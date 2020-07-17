@@ -30,6 +30,12 @@ namespace Source
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<CodenationContext>();
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddScoped<IAccelerationService, AccelerationService>();
+            services.AddScoped<ICandidateService, CandidateService>();
+            services.AddScoped<IChallengeService, ChallengeService>();
+            services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<ISubmissionService, SubmissionService>();
             services.AddScoped<IUserService, UserService>();
         }
 
