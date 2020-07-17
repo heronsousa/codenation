@@ -12,5 +12,30 @@ namespace Codenation.Challenge.Controllers
     [ApiController]
     public class ChallengeController : ControllerBase
     {
+        private IMapper _mapper;
+        private IChallengeService _service;
+
+        public ChallengeController(IMapper mapper, IChallengeService service)
+        {
+            _service = service;
+            _mapper = mapper;
+        }
+
+        // GET api/challenge
+        [HttpGet]
+        public ActionResult<IEnumerable<ChallengeDTO>> GetAll(int? accelerationId = null, int? userId = null)
+        {
+            if (accelerationId != null && userId != null)
+                return Ok(_mapper.Map<IEnumerable<ChallengeDTO>>(_service.FindByAccelerationIdAndUserId(accelerationId.Value, userId.Value)));
+
+            return NoContent();
+        }
+
+        // POST api/challenge
+        [HttpPost]
+        public ActionResult<ChallengeDTO> Post([FromBody] ChallengeDTO value)
+        {
+            return Ok(_mapper.Map<ChallengeDTO>(_service.Save(_mapper.Map<Models.Challenge>(value))));
+        }
     }
 }
