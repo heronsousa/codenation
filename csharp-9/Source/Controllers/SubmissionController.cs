@@ -42,7 +42,7 @@ namespace Codenation.Challenge.Controllers
             return NoContent();
         }
 
-        // POST api/user
+        // POST api/submission
         [HttpPost]
         public ActionResult<SubmissionDTO> Post([FromBody] SubmissionDTO value)
         {
