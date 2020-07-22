@@ -17,7 +17,8 @@ namespace Codenation.Challenge.Services
 
         public Quote GetAnyQuote()
         {
-            throw new System.NotImplementedException();
+            return _context.Quotes
+                .ElementAt(_randomService.RandomInteger(_context.Quotes.Count()));
         }
 
         public Quote GetAnyQuote(string actor)
