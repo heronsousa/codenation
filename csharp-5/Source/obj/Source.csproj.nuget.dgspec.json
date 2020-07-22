@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\heron\\codenation\\csharp-5\\Source\\Source.csproj": {}
+    "C:\\Users\\heron\\codenation\\csharp-5\\source\\Source.csproj": {}
   },
   "projects": {
-    "C:\\Users\\heron\\codenation\\csharp-5\\Source\\Source.csproj": {
+    "C:\\Users\\heron\\codenation\\csharp-5\\source\\Source.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\heron\\codenation\\csharp-5\\Source\\Source.csproj",
+        "projectUniqueName": "C:\\Users\\heron\\codenation\\csharp-5\\source\\Source.csproj",
         "projectName": "Source",
-        "projectPath": "C:\\Users\\heron\\codenation\\csharp-5\\Source\\Source.csproj",
+        "projectPath": "C:\\Users\\heron\\codenation\\csharp-5\\source\\Source.csproj",
         "packagesPath": "C:\\Users\\heron\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\heron\\codenation\\csharp-5\\Source\\obj\\",
+        "outputPath": "C:\\Users\\heron\\codenation\\csharp-5\\source\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
