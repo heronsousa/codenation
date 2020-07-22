@@ -41,7 +41,13 @@ namespace Codenation.Challenge
             Assert.Null(actual);
         }
 
-
+        [Fact]
+        public void Should_Returns_Quote_When_Get_Any_Quote()
+        {
+            var fakeService = new QuoteService(fakeContext.Object, new RandomService());
+            var actual = fakeService.GetAnyQuote();
+            Assert.IsType<Quote>(actual);
+        }
     }
 
 }
