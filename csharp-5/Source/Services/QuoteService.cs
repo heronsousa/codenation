@@ -23,7 +23,9 @@ namespace Codenation.Challenge.Services
 
         public Quote GetAnyQuote(string actor)
         {
-            throw new System.NotImplementedException();
+            return _context.Quotes
+                .Where(q => q.Actor == actor)
+                .FirstOrDefault();
         }
     }
 }
