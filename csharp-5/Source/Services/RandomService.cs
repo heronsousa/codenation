@@ -6,7 +6,9 @@ namespace Codenation.Challenge.Services
     {
         public int RandomInteger(int max)
         {
-            throw new NotImplementedException();
+            var rand = new Random();
+
+            return rand.Next(max+1);
         }
     }
 }
