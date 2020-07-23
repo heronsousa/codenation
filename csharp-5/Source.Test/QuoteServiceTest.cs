@@ -38,6 +38,7 @@ namespace Codenation.Challenge
         {
             var fakeService = new QuoteService(fakeContext.Object, new RandomService());            
             var actual = fakeService.GetAnyQuote("Brian");
+            Console.WriteLine(actual);
             Assert.Null(actual);
         }
 

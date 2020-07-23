@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Codenation.Challenge.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Codenation.Challenge.Services
 {
@@ -17,15 +18,27 @@ namespace Codenation.Challenge.Services
 
         public Quote GetAnyQuote()
         {
+            int value = _randomService.RandomInteger(_context.Quotes.Count());
+            
             return _context.Quotes
-                .ElementAt(_randomService.RandomInteger(_context.Quotes.Count()));
+                .Skip(value)
+                .First();
         }
 
         public Quote GetAnyQuote(string actor)
         {
-            return _context.Quotes
-                .Where(q => q.Actor == actor)
-                .FirstOrDefault();
+            var result = _context.Quotes
+                .Where(q => q.Actor == actor);
+
+            int count = result.Count();
+
+            if (count == 0)
+                return null;
+
+            int value = _randomService.RandomInteger(count);
+            return result
+                .Skip(value)
+                .First();
         }
     }
 }
