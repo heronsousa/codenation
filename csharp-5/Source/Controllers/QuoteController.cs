@@ -21,14 +21,31 @@ namespace Codenation.Challenge.Controllers
         [HttpGet]
         public ActionResult<QuoteView> GetAnyQuote()
         {
-            return Ok(_service.GetAnyQuote());
+            var quote = _service.GetAnyQuote();
+
+            return new QuoteView()
+            {
+                Id = quote.Id,
+                Actor = quote.Actor,
+                Detail = quote.Detail
+            };
         }
 
         // GET api/quote/{actor}
         [HttpGet("{actor}")]
         public ActionResult<QuoteView> GetAnyQuote(string actor)
         {
-            return Ok(_service.GetAnyQuote(actor));
+            var quote = _service.GetAnyQuote(actor);
+
+            if (quote == null)
+                return NotFound();   
+
+            return new QuoteView()
+            {
+                Id = quote.Id,
+                Actor = quote.Actor,
+                Detail = quote.Detail
+            };
         }
 
     }
